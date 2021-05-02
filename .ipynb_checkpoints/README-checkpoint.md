@@ -1,12 +1,3 @@
-
-Document Process
-Do the following steps in your README.md file.
-
-Discuss the purpose of this database in the context of the startup, Sparkify, and their analytical goals.
-State and justify your database schema design and ETL pipeline.
-[Optional] Provide example queries and results for song play analysis.
-Here's a guide on Markdown Syntax.
-
 # Data Modelling with Postgres and ETL with Python
 
 ><u>Background:</u> The project assumes a Hypothetical Music Company, named Sparkify, currently collects activity logs about the users of its app and metadata about the songs on its app in JSON format. The company wants to run valrious analytics on the data it has but in its current form, it is unsuitable to achieve that goal.
