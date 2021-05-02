@@ -21,7 +21,7 @@
     LIMIT 5;
 
 `Output`
-<img src='static/script1'>
+<img src='static/script1.png'>
 <br>
 Another analysis question:
 **The company wants to find out the most played songs on Mondays in order to understand how the first day of the week affects user behaviour**
