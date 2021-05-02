@@ -40,3 +40,5 @@ Another analysis question:
     WHERE weekday=2
     GROUP BY title;
 ```
+
+**P.S:** Data used for exercise is a subset of the main dataset. The full dataset can be downloaded <a href="https://labrosa.ee.columbia.edu/millionsong/">here</a>
