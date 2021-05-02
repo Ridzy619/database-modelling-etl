@@ -18,7 +18,8 @@
     JOIN time
     ON songplays.start_time = time.start_time
     GROUP BY weekday
-    LIMIT 5;```
+    LIMIT 5;
+```
 
 
 `Output`
@@ -27,7 +28,9 @@
 <br>
 Another analysis question:
 **The company wants to find out the most played songs on Mondays in order to understand how the first day of the week affects user behaviour**
+
 `Script`
+
 ```sql
     SELECT title, count(title) FROM songplays 
     JOIN time
