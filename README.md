@@ -21,6 +21,7 @@
     LIMIT 5;
 
 `Output`
+
 <img src='static/script1.png'>
 <br>
 Another analysis question:
