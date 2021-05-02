@@ -13,12 +13,13 @@
 **Sparkify would like to know what time of the day its users mostly listen to music**
 
 `Script`
-
+```sql
     SELECT weekday, count(user_id) FROM songplays 
     JOIN time
     ON songplays.start_time = time.start_time
     GROUP BY weekday
-    LIMIT 5;
+    LIMIT 5;```
+
 
 `Output`
 
@@ -27,11 +28,12 @@
 Another analysis question:
 **The company wants to find out the most played songs on Mondays in order to understand how the first day of the week affects user behaviour**
 `Script`
-
+```sql
     SELECT title, count(title) FROM songplays 
     JOIN time
     ON songplays.start_time = time.start_time
     JOIN songs
     ON songs.song_id = songplays.song_id
     WHERE weekday=2
-    GROUP BY title
+    GROUP BY title;
+```
