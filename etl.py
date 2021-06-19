@@ -6,20 +6,32 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    '''
+    Process the song files and extract song data and artist data
+    
+    Update those data on the corresponding database tables.
+    '''
     # open song file
     df = pd.read_json(filepath, lines=True)
-
+    
     # insert song record
     song_data = [row for _,row in df[['song_id', 'title', 'artist_id', 'year', 'duration']].iterrows()][0]
     cur.execute(song_table_insert, song_data)
     
     # insert artist record
-    artist_data = [row for _,row in df[['artist_id', 'artist_name', 'artist_location',\
-                                               'artist_latitude', 'artist_longitude']].iterrows()][0]
-    cur.execute(artist_table_insert, artist_data)
-
+    artist_cols = ['artist_id', 'artist_name', 'artist_location', 'artist_latitude', 'artist_longitude']
+    artist_data = [row for _, row in df[artist_cols].drop_duplicates('artist_id').iterrows()][0]
+    try:
+        cur.execute(artist_table_insert, artist_data)
+    except psycopg2.IntegrityError:
+        print('Error on', artist_data)
 
 def process_log_file(cur, filepath):
+    '''
+    Process the log files and extract time data, user data, and song play data
+    
+    Update those data on the corresponding database tables.
+    '''
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -43,7 +55,10 @@ def process_log_file(cur, filepath):
 
     # insert user records
     for i, row in user_df.iterrows():
-        cur.execute(user_table_insert, row)
+        try:
+            cur.execute(user_table_insert, row)
+        except psycopg2.IntegrityError:
+            conn.rollback()
 
     # insert songplay records
     for index, row in df.iterrows():
@@ -72,6 +87,9 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    '''
+    Function to iterate through the directories to extract all the files and run the functions that populate the database
+    '''
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -91,6 +109,8 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    '''
+    Function to connect to the database and kickstart the ETL'''
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 

@@ -1,14 +1,22 @@
 # Data Modelling with Postgres and ETL with Python
 
-><u>Background:</u> The project assumes a Hypothetical Music Company, named Sparkify, currently collects activity logs about the users of its app and metadata about the songs on its app in JSON format. The company wants to run valrious analytics on the data it has but in its current form, it is unsuitable to achieve that goal.
+>Background: The project assumes a Hypothetical Music Company, named Sparkify, currently collects activity logs about the users of its app and metadata about the songs on its app in JSON format. The company wants to run valrious analytics on the data it has but in its current form, it is unsuitable to achieve that goal.
 
-><u>Proposed Solution:</u> For the data to be presented in a form that is easy to analyse, it has to be stored in relational format with a focus on efficiency of running analysis.
+>Proposed Solution: For the data to be presented in a form that is easy to analyse, it has to be stored in relational format with a focus on efficiency of running analysis.
 
-><u>Choice of Database:</u> The choice of database is Postgres.  This is mainly due it being open source and scalable and extensible.
+>Choice of Database: The choice of database is Postgres.  This is mainly due it being open source and scalable and extensible.
 
 ## Database Design and ETL Process
-><u>Schema:</u> The choice of schema I made is Star Schema. This is influenced by the analytics-focused requirement of the database. The database is setup with a *facts* table that stores information about `songplays` activities, and four *dimensions* tables that store information about `users`, `artists`, `songs` and `time`.
-><u>ETL Process:</u> `artists` and `songs` data are extracted from the songs metadata directory json files while the `songplays`, `users` and `time` data are extracted from the songs activities log files. The files are parsed and relevant attributes data are written to the respective tables using SQL scripts.
+>Schema: The choice of schema I made is Star Schema. This is influenced by the analytics-focused requirement of the database. The database is setup with a *facts* table that stores information about `songplays` activities, and four *dimensions* tables that store information about `users`, `artists`, `songs` and `time`.
+>ETL Process: `artists` and `songs` data are extracted from the songs metadata directory json files while the `songplays`, `users` and `time` data are extracted from the songs activities log files. The files are parsed and relevant attributes data are written to the respective tables using SQL scripts.
+
+## How to Run the ETL
+> In order to run the ETL, run the following scripts in the given order:
+
+```bash
+python3 create_tables.py
+python3 etl.py
+```
 ## Examples Analysis
 **Sparkify would like to know what time of the day its users mostly listen to music**
 
